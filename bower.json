@@ -23,6 +23,7 @@
     "webshim": "~1.15.8",
     "angular-growl-v2": "~0.7.5",
     "angular-ui-sortable": "~0.13.4"
+    "bootswatch": "~3.3.5+2"
   },
   "ignore": [
     "**/.*",
