@@ -5,15 +5,14 @@
 		return {
 			restrict:    'E',
 			scope:       {
-				form: '=form'
+				form:       '=form',
+				isEditable: '=isEditable'
 			},
 			transclude:  true,
 			templateUrl: 'app/components/mpd-form/mpd-form.html',
 			link:        function ( $scope, $element, $attributes, $controllers ) {
 			},
 			controller:  function ( $scope ) {
-				$scope.isEditable = true;
-
 				$scope.sectionSortableOptions = {
 					handle: '.navbar-brand.move-handle'
 				};
@@ -42,7 +41,7 @@
 				$scope.addSection = function () {
 					$scope.form.sections.push( {
 						total_mode: 'both',
-						questions: [{
+						questions:  [{
 							type: 'basic_month'
 						}]
 					} );

@@ -10,9 +10,11 @@
 					if ( !isAdmin ) {
 						$state.go( 'budgets' );
 					}
+
 					return MPDForms.query( {
-						ministry_id: ministry.ministry_id,
-						show_inactive: true
+						ministry_id:    ministry.ministry_id,
+						show_inactive:  true,
+						include_global: true
 					} ).$promise;
 				}
 			},

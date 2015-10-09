@@ -6,21 +6,22 @@
 			parent:  'forms',
 			url:     '/{mpd_def_id}',
 			resolve: {
-				'form': function ( $log, $q, $stateParams, $state, MPDForms, forms ) {
+				'form': function ( $log, $q, $stateParams, $state, MPDForms, ministry, forms ) {
 					var deferred = $q.defer(),
 						form     = undefined;
 
-					// Edit from by ID
+					// Edit form by ID
 					if ( angular.isDefined( $stateParams.mpd_def_id ) && $stateParams.mpd_def_id !== '' ) {
 						var mpd_def_id = +$stateParams.mpd_def_id;
-						form = _.findWhere( forms, {mpd_def_id: mpd_def_id} );
-						if ( angular.isUndefined( form ) ) {
+
+						// All Forms must be fetched from the API
+						MPDForms.get( {mpd_def_id: mpd_def_id, ministry_id: ministry.ministry_id}, function ( form ) {
+							deferred.resolve( form );
+						}, function () {
+							// Error fetching form
 							deferred.reject();
 							$state.go( 'forms' );
-						}
-						else {
-							deferred.resolve( form );
-						}
+						} );
 					}
 					// New form using $stateParams.form as template
 					else if ( angular.isDefined( $stateParams.form ) && angular.isObject( $stateParams.form ) ) {
@@ -62,6 +63,7 @@
 	.module( 'mpdCalculator.states.forms.edit', [
 		// Dependencies
 		'ui.router',
+		'ui.select',
 		'mpdCalculator.states.forms',
 		'mpdCalculator.api.measurements',
 		'mpdCalculator.components.mpdForm',

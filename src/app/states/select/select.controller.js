@@ -2,12 +2,16 @@
 	'use strict';
 
 	module
-		.controller( 'SelectMinistryController', function ( $log, $scope, $state, ministries, ministry ) {
+		.controller( 'SelectMinistryController', function ( $log, $scope, $timeout, $state, ministries, ministry ) {
 			$scope.$state = $state;
 			$scope.ministries = ministries;
+			$scope.ministry = ministry || undefined;
 
-			$scope.setMinistry = function () {
-				$state.go( 'budgets', {min_code: $scope.ministry.min_code} );
+			$scope.editable = true;
+
+			$scope.onSelectMinistry = function ( $item, $model, $label ) {
+				$scope.editable = false;
+				$state.go( 'budgets', {min_code: $item.min_code} );
 			};
 		} );
 

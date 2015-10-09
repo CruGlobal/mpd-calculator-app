@@ -28,6 +28,10 @@
 		growlProvider.globalTimeToLive( {success: 10000, error: -1, warning: -1, info: 10000} );
 	} );
 
+	module.config( function ( uiSelectConfig ) {
+		uiSelectConfig.theme = 'bootstrap';
+	} );
+
 	module.run( function ( $log, $rootScope ) {
 		$rootScope.$on( '$stateChangeError', function ( event, toState, toParams, fromState, fromParams, error ) {
 			$log.error( '$stateChangeError:', toState, toParams, error );

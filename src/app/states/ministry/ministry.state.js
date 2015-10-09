@@ -47,7 +47,7 @@
 					return _.contains( roles, 'leader' )
 						|| _.contains( roles, 'inherited_leader' )
 						|| _.contains( roles, 'admin' )
-						|| _.contains( roles, 'admin_leader' );
+						|| _.contains( roles, 'inherited_admin' );
 				}
 			}
 		} );

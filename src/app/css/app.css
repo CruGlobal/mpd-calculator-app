@@ -200,6 +200,11 @@ body {
   font-size: 75%;
   cursor: pointer;
 }
+.nav-sidebar li.description {
+  color: #2b3e50;
+  padding: 1px 20px;
+  font-size: 13px;
+}
 .person + .period {
   font-size: 75%;
   font-variant: small-caps;

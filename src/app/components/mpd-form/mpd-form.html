@@ -8,7 +8,7 @@
 				</div>
 				<div>
 					<div class="navbar-form navbar-right">
-						<div class="btn-group" dropdown>
+						<div class="btn-group" dropdown ng-if="isEditable">
 							<button type="button" class="btn btn-info" dropdown-toggle>
 								<span translate>Actions</span> <span class="caret"></span>
 							</button>
@@ -55,7 +55,7 @@
 				<div class="col-xs-6 col-xs-offset-3">
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" ng-model="form.active" ng-true-value="true" ng-false-value="false">
+							<input type="checkbox" ng-model="form.active" ng-true-value="true" ng-false-value="false" ng-disabled="!isEditable">
 							<span translate>Staff may use this form to create budgets.</span>
 						</label>
 					</div>
@@ -112,7 +112,7 @@
 			<div ng-repeat="section in form.sections" ng-init="section.$index = $index + 1">
 				<nav class="navbar navbar-inverse navbar-section">
 					<div class="container-fluid">
-						<div class="navbar-brand move-handle">
+						<div class="navbar-brand move-handle" ng-if="isEditable">
 							<span class="glyphicon glyphicon-menu-hamburger"></span>
 						</div>
 						<div class="navbar-header">
@@ -128,7 +128,7 @@
 						</div>
 						<div>
 							<div class="navbar-form navbar-right">
-								<div class="btn-group" dropdown>
+								<div class="btn-group" dropdown ng-if="isEditable">
 									<button type="button" class="btn btn-primary" dropdown-toggle>
 										<span translate>Actions</span> <span class="caret"></span>
 									</button>
@@ -151,8 +151,8 @@
 				<div class="budget-well sortable" ui-sortable="questionSortableOptions" ng-model="section.questions">
 
 					<div class="line-item" ng-repeat="question in section.questions" ng-init="question.$index = $index + 1">
-						<div class="col-xs-1 move-handle">
-							<span class="glyphicon glyphicon-menu-hamburger"></span>
+						<div class="col-xs-1" ng-class="{'move-handle': isEditable}">
+							<span class="glyphicon glyphicon-menu-hamburger" ng-if="isEditable"></span>
 							<span> {{form.sections.indexOf(section) + 1}}.{{section.questions.indexOf(question) +1 }}</span>
 						</div>
 
@@ -224,7 +224,7 @@
 										 form="form"></mpd-formula>
 						</div>
 						<div class="col-xs-1">
-							<div class="btn-group pull-right" dropdown>
+							<div class="btn-group pull-right" dropdown ng-if="isEditable">
 								<button type="button" class="btn btn-default" dropdown-toggle>
 									<span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
 								</button>

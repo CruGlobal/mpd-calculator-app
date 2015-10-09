@@ -5,6 +5,8 @@
 		// Dependencies
 		'gettext',
 		'ui.router',
+		'ngSanitize',
+		'ui.select',
 		'mpdCalculator.settingsService',
 		'mpdCalculator.api.measurements',
 

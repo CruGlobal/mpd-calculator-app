@@ -31,11 +31,14 @@
 		<script type="application/javascript" src="bower_components/webshim/js-webshim/dev/polyfiller.js"></script>
 		<script type="application/javascript" src="bower_components/jquery-ui/jquery-ui.js"></script>
 		<script type="application/javascript" src="bower_components/angular-ui-sortable/sortable.js"></script>
+		<script type="application/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+		<script type="application/javascript" src="bower_components/ui-select/dist/select.js"></script>
 		<script type="application/javascript">
 			webshims.polyfill( 'forms forms-ext' );
 		</script>
 		<!--<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />-->
 		<link rel="stylesheet" href="bower_components/bootswatch/superhero/bootstrap.css" />
+		<link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
 
 		<!-- Application CSS -->
 		<!-- build:styles -->

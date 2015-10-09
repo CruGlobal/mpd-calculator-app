@@ -5,8 +5,9 @@
 		return {
 			restrict:    'E',
 			scope:       {
-				forms: '&forms',
-				title: '@'
+				forms:       '&forms',
+				title:       '@',
+				description: '@'
 			},
 			templateUrl: 'app/components/mpd-form-list/mpd-form-list.html',
 			controller:  function ( $scope ) {

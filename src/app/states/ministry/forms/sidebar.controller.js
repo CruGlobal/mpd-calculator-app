@@ -7,9 +7,14 @@
 			$scope.user = user;
 			$scope.forms = forms;
 
-			$scope.notEqual = function ( actual, expected ) {
-				return !angular.equals( actual, expected );
-			};
+			// Marks global forms as active if no active ministry forms exist, inactive otherwise
+			$scope.globalActive = function ( form, index, forms ) {
+				if ( form.is_global ) {
+					var active = _.findWhere( forms, {active: true, is_global: false} );
+					form.active = typeof active === 'undefined';
+				}
+				return true;
+			}
 		} );
 
 })( angular.module( 'mpdCalculator.states.forms' ) );

@@ -10,9 +10,8 @@
 		   translate-comment="BUTTON - Create new form"
 		   translate>Create a new Form</a>
 
-		<mpd-form-list forms="forms | filter:{is_global: true}:true | orderBy:'name'" title="{{'Global Forms' | translate}}"></mpd-form-list>
-
-		<mpd-form-list forms="forms | filter:{is_global: false}:true | orderBy:'name'" title="{{'Ministry Forms' | translate}}"></mpd-form-list>
-
+		<mpd-form-list forms="forms | filter:globalActive | orderBy:'name'"
+					   title="{{'Ministry Forms' | translate}}"
+					   description="{{'These are the forms assigned to the ministry. Forms labeled as active are available to staff to create budgets.' | translate}}"></mpd-form-list>
 	</div>
 </div>
