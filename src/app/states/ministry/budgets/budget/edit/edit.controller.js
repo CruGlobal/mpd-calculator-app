@@ -214,6 +214,24 @@
 		$scope.cancel = function () {
 			$state.go( 'budgets' );
 		};
+
+		$scope.$on( '$stateChangeStart', function ( event, toState, toParams, fromState, fromParams ) {
+			// Warn on unsaved changes
+			if ( $scope.editForm.$dirty ) {
+				event.preventDefault();
+				$modal.open( {
+					backdrop:    'static',
+					keyboard:    false,
+					templateUrl: 'app/states/ministry/unsaved-changes.modal.html',
+					controller:  'UnsavedChangesController as dialog'
+				} ).result.then( function () {
+						// Discard changes and proceed with transition.
+						$scope.editForm.$setPristine();
+						$state.go( toState, toParams );
+					}, function () {
+					} );
+			}
+		} );
 	} );
 
 })( angular.module( 'mpdCalculator.states.budgets.budget.edit' ) );

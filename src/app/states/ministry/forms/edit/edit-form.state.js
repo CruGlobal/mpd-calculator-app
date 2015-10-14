@@ -64,6 +64,8 @@
 		// Dependencies
 		'ui.router',
 		'ui.select',
+		'ui.bootstrap.modal',
+		'ui.bootstrap.tpls',
 		'mpdCalculator.states.forms',
 		'mpdCalculator.api.measurements',
 		'mpdCalculator.components.mpdForm',

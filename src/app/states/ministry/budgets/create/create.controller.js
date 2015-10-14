@@ -1,20 +1,16 @@
 (function ( module ) {
 	'use strict';
 
-	module.controller( 'CreateBudgetController', function ( $log, $scope, $state, gettext, MPDBudgets, forms, budget, user, growl, budgets ) {
+	module.controller( 'CreateBudgetController', function ( $log, $scope, $state, $modal, gettext, MPDBudgets, forms, form, budget, user, growl, budgets ) {
 		$scope.forms = forms;
+		$scope.form = form;
 		$scope.budget = budget;
 		$scope.user = user;
 		$scope.isEditable = true;
 
 		$scope.$watch( 'budget.mpd_def_id', function ( id, oldId ) {
-			if ( angular.isUndefined( id ) ) {
-				delete $scope.form;
-			}
-			else {
-				$scope.form = _.findWhere( forms, {mpd_def_id: id} );
-				//TODO Create new budget when form changes
-			}
+			if ( angular.isUndefined( id ) ) return;
+			$state.go( 'createBudget', {mpd_def_id: id} );
 		} );
 
 		$scope.saveDraft = function () {
@@ -33,6 +29,23 @@
 			} );
 		};
 
+		$scope.$on( '$stateChangeStart', function ( event, toState, toParams, fromState, fromParams ) {
+			// Warn on unsaved changes
+			if ( $scope.createForm.$dirty ) {
+				event.preventDefault();
+				$modal.open( {
+					backdrop:    'static',
+					keyboard:    false,
+					templateUrl: 'app/states/ministry/unsaved-changes.modal.html',
+					controller:  'UnsavedChangesController as dialog'
+				} ).result.then( function () {
+						// Discard changes and proceed with transition.
+						$scope.createForm.$setPristine();
+						$state.go( toState, toParams );
+					}, function () {
+					} );
+			}
+		} );
 	} );
 
 })( angular.module( 'mpdCalculator.states.budgets.create' ) );

@@ -42,7 +42,6 @@
 
 		<!-- Application CSS -->
 		<!-- build:styles -->
-		<link rel="stylesheet" href="bower_components/angular-growl-v2/build/angular-growl.css" />
 		<link rel="stylesheet" href="app/css/app.css" />
 		<!-- endbuild -->
 	</head>
@@ -58,10 +57,21 @@
 			</div>
 		</nav>
 
-		<div class="sk-spinner sk-spinner-three-bounce">
-			<div class="sk-bounce1"></div>
-			<div class="sk-bounce2"></div>
-			<div class="sk-bounce3"></div>
+		<div class="sk-container">
+			<div>
+				<div>Application Loading &hellip;</div>
+				<div class="sk-cube-grid">
+					<div class="sk-cube sk-cube1"></div>
+					<div class="sk-cube sk-cube2"></div>
+					<div class="sk-cube sk-cube3"></div>
+					<div class="sk-cube sk-cube4"></div>
+					<div class="sk-cube sk-cube5"></div>
+					<div class="sk-cube sk-cube6"></div>
+					<div class="sk-cube sk-cube7"></div>
+					<div class="sk-cube sk-cube8"></div>
+					<div class="sk-cube sk-cube9"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -105,6 +115,7 @@
 	<script type="application/javascript" src="app/states/ministry/change-ministry.controller.js"></script>
 	<script type="application/javascript" src="app/states/ministry/forms/sidebar.controller.js"></script>
 	<script type="application/javascript" src="app/states/ministry/forms/edit/edit-form.controller.js"></script>
+	<script type="application/javascript" src="app/states/ministry/unsaved-changes.controller.js"></script>
 	<script type="application/javascript" src="app/states/select/select.controller.js"></script>
 	<!-- endbuild -->
 

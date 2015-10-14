@@ -19,13 +19,14 @@
     "angular-ui-router": "~0.2",
     "angular-ui-sortable": "~0.13.4",
     "bootstrap": "~3.3",
-    "bootswatch": "~3.3.5+2",
+    "bootswatch": "v3.3.5+4",
     "moment": "~2",
     "ngstorage": "~0.3.7",
     "underscore": "~1",
     "webshim": "~1.15.8",
     "ui-select": "angular-ui-select#~0.13.1",
-    "angular-sanitize": "~1.3"
+    "angular-sanitize": "~1.3",
+    "SpinKit": "spinkit#~1.2.2"
   },
   "ignore": [
     "**/.*",
