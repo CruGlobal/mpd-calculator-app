@@ -21,11 +21,9 @@
 		<script type="application/javascript" src="bower_components/angular-loader/angular-loader.js"></script>
 		<script type="application/javascript" src="bower_components/angular/angular.js"></script>
 		<script type="application/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
-		<script type="application/javascript" src="bower_components/angular-gettext/dist/angular-gettext.js"></script>
 		<script type="application/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 		<script type="application/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 		<script type="application/javascript" src="bower_components/ngstorage/ngStorage.js"></script>
-		<script type="application/javascript" src="bower_components/angular-growl-v2/build/angular-growl.js"></script>
 		<script type="application/javascript" src="bower_components/moment/moment.js"></script>
 		<script type="application/javascript" src="bower_components/underscore/underscore.js"></script>
 		<script type="application/javascript" src="bower_components/webshim/js-webshim/dev/polyfiller.js"></script>
@@ -36,13 +34,16 @@
 		<script type="application/javascript">
 			webshims.polyfill( 'forms forms-ext' );
 		</script>
-		<!--<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />-->
 		<link rel="stylesheet" href="bower_components/bootswatch/superhero/bootstrap.css" />
-		<link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
 
 		<!-- Application CSS -->
 		<!-- build:styles -->
 		<link rel="stylesheet" href="app/css/app.css" />
+		<!-- endbuild -->
+
+		<!-- build:library -->
+		<script type="application/javascript" src="bower_components/angular-gettext/dist/angular-gettext.js"></script>
+		<script type="application/javascript" src="bower_components/angular-growl-v2/build/angular-growl.js"></script>
 		<!-- endbuild -->
 	</head>
 	<body>
