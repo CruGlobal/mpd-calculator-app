@@ -1,6 +1,6 @@
 {
 	"name": "globaltechnology/mpd-calculator-app",
-	"description": "MPD Calculator Application",
+	"description": "MPD Calculator Application Wrapper",
 	"authors": [
 		{
 			"name": "Brian Zoetewey",

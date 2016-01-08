@@ -31,6 +31,7 @@
 
 		public $casClient;
 		public $url;
+		public $path;
 
 		/**
 		 * Constructor
@@ -38,7 +39,10 @@
 		private function __construct() {
 			//Load config
 			$configDir = dirname( dirname( __FILE__ ) ) . '/config';
-			Config::load( require $configDir . '/config.php', require $configDir . '/defaults.php' );
+			Config::load( file_exists(
+				$configDir . '/config.php' ) ? require $configDir . '/config.php' : array(),
+				require $configDir . '/defaults.php'
+			);
 
 			//Generate Current URL taking into account forwarded proto
 			$url = \Net_URL2::getRequested();
@@ -46,7 +50,8 @@
 			$url->setPath( dirname( $_SERVER[ 'PHP_SELF' ] ) );
 			if ( isset( $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] ) )
 				$url->setScheme( $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] );
-			$this->url = $url;
+			$this->url  = $url;
+			$this->path = rtrim( $this->url->getPath(), '/' );
 
 			// Initialize phpCAS proxy client
 			$this->casClient = $this->initializeCAS();
@@ -66,8 +71,18 @@
 				$casClient->setCallbackURL( Config::get( 'pgtservice.callback' ) );
 				$casClient->setPGTStorage( new ProxyTicketServiceStorage( $casClient ) );
 			}
+			else if ( false !== Config::get( 'redis.hostname', false ) ) {
+				$casClient->setCallbackURL( $this->url->getURL() . '/callback.php' );
+
+				$redis = new \Redis();
+				$redis->connect( Config::get( 'redis.hostname' ), Config::get( 'redis.port', 6379 ), 2, null, 100 );
+				$redis->setOption( \Redis::OPT_SERIALIZER, \Redis::SERIALIZER_PHP );
+				$redis->setOption( \Redis::OPT_PREFIX, Config::get( 'application.project_name' ) . ':PHPCAS_TICKET_STORAGE:' );
+				$redis->select( (int)Config::get( 'redis.hostname', 2 ) );
+				$casClient->setPGTStorage( new RedisTicketStorage( $casClient, $redis ) );
+			}
 			else {
-				$casClient->setCallbackURL( $this->url->resolve( 'callback.php' )->getURL() );
+				$casClient->setCallbackURL( $this->url->getURL() . '/callback.php' );
 				$casClient->setPGTStorageFile( session_save_path() );
 				// Handle logout requests but do not validate the server
 				$casClient->handleLogoutRequests( false );
@@ -83,16 +98,6 @@
 			return $this->casClient->retrievePT( Config::get( 'measurements.endpoint' ) . '/token', $code, $msg );
 		}
 
-		public function versionUrl( $url ) {
-			$version = Config::get( 'version', false );
-			if ( $version ) {
-				$url = new \Net_URL2( $url );
-				$url->setQueryVariable( 'ver', $version );
-				return $url->getURL();
-			}
-			return $url;
-		}
-
 		public function authenticate() {
 			$this->casClient->forceAuthentication();
 		}
@@ -102,8 +107,8 @@
 		}
 
 		public function appDir( $path = '' ) {
-			$url = $this->url->resolve( 'app/' . Config::get( 'application.directory', 'dist' ) . '/' . ltrim( $path, '/' ) );
-			$url->setQueryVariable( 'ver', Config::get( 'version', 'false' ) );
+			$url = new \Net_URL2( $this->path . '/app/' . Config::get( 'application.directory', 'dist' ) . '/' . ltrim( $path, '/' ) );
+			$url->setQueryVariable( 'ver', Config::get( 'application.version', 'false' ) );
 			return $url->getURL();
 		}
 
