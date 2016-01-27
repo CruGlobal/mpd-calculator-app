@@ -23,11 +23,14 @@
 			}
 		</style>
 
-		<!--<script type="application/javascript" src="<? echo $wrapper->appDir( "wrapper{$min}.js" ); ?>"></script>-->
+		<!--<script type="application/javascript" src="<? echo $wrapper->appDir( "iframeResizer{$min}.js" ); ?>"></script>-->
 	</head>
 	<body style="margin: 0;">
 	<iframe id="MPDCalculatorApplication" src="<?php echo $wrapper->appDir( 'index.html' ); ?>" style="width: 100%; border-width: 0;"></iframe>
-	<!--<script type="application/javascript">iFrameResize( {minHeight: 500}, document.getElementById( 'MPDDashboardApplication' ) );</script>-->
+
+	<!-- Resizeable iFrame Example -->
+	<!--<iframe id="MPDCalculatorApplication" src="<?php echo $wrapper->appDir( 'index.html' ); ?>" style="width: 100%; border-width: 0;" scrolling="no"></iframe>-->
+	<!--<script type="application/javascript">iFrameResize( {minHeight: 500}, document.getElementById( 'MPDCalculatorApplication' ) );</script>-->
 	</body>
 	</html>
 <?php }
