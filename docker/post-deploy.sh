@@ -15,4 +15,4 @@ else
 fi
 
 # Symlink application to nginx
-ln -nsf /home/app /var/www/app;
+ln -nsf /home/app/webapp /var/www/app;

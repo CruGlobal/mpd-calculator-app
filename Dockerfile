@@ -2,7 +2,10 @@ FROM cruglobal/base-image-php:latest
 MAINTAINER cru.org <apps@cru.org>
 
 # Nginx is pointed at /var/www/app as document root
-# App is installed at /home/app
+# App is installed at /home/app/webapp
+
+# Copy source
+COPY . /home/app/webapp
 
 # Install PHP dependencies
 RUN composer install --no-dev
